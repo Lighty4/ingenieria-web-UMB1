@@ -7,32 +7,35 @@ header {
   background-color: #04809f;
   border-color: #04809f;
   height: auto;
-  padding-right: 10px
+  padding-right: 10px;
+  
 }
 
-@media screen and (min-width: 400px){
-    max-height: 40%;
-    min-height: 20%;
+@media (max-height:720px) {
+  header{
+   min-height: 15%; 
+  }
   }
 
-.hedTop, .hedBot {
+  .headTop{
   display: grid; 
-  width: 100%; 
-  justify-content: center;
-}
-
-.headTop{
   height: 100px;
   max-height: 15%;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 20% 60% 10% 10%;
+  width: 100%; 
+  place-items: center;
 }
 
+
+
 .hedBot{
+  display: grid; 
   background-color: #025c72;
-  height: auto;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 33.3333333333333% 33.3333333333333% 33.3333333333333%;
   padding: 5px;
   overflow: hidden ;
+  justify-content: center;
+  width: 100%; 
 } 
 
 .hedTop img {
@@ -50,9 +53,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
   height: 20px;
   padding: 10px;
+  border-radius: 15px;
+  margin: top 50%;;
 }
 
 .CajaProducto{
@@ -61,8 +66,10 @@ header {
   background-color: rgb(235, 235, 235);
 }
 
-.lupa:hover{
+.lupa{
   background-color: #00000060;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 .TituloPro{
