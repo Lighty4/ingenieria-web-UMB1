@@ -19,7 +19,45 @@
 </header>
 
 <body>
-    <div class="CajaCarrito" >
+    <div class="CajaCarrito" data-id="displayCarrito" >
         <h2 style="align-items: center;">El carrito esta vacio</h2>
     </div>
+    <script>
+        // Función para obtener y mostrar los productos del carrito
+        async function cargarCarrito() {
+            try {
+                // Obtener los datos del carrito desde el backend
+                const response = await fetch("http://localhost:3000/api/cart");
+                const productos = await response.json();
+
+                // Seleccionar el contenedor del carrito
+                const carritoContainer = document.getElementById("displayCarrito");
+
+                // Limpiar el contenedor
+                carritoContainer.innerHTML = "";
+
+                // Recorrer los productos y crear los elementos HTML
+                productos.forEach(producto => {
+                    const productoDiv = document.createElement('div');
+                    productoDiv.classList.add('producto-item');
+
+                    // Estructura HTML para cada producto
+                    productoDiv.innerHTML = `
+                        <h2>${producto.nombre}</h2>
+                        <p>Precio: ${producto.precio.toFixed(2)}</p>
+                        <p>Cantidad: ${producto.cantidad}</p>
+                        <p>Total: ${producto.total.toFixed(2)}</p>
+                    `;
+
+                    // Agregar el producto al contenedor del carrito
+                    carritoContainer.appendChild(productoDiv);
+                });
+            } catch (error) {
+                console.error('Error al cargar el carrito:', error);
+            }
+        }
+
+        // Llamar a la función para cargar el carrito cuando se cargue la página
+        cargarCarrito();
+    </script>
 </body>

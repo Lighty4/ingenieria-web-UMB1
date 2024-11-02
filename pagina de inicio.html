@@ -8,15 +8,15 @@
 <header>
     <div class="headTop">
                 <!--logo de la tienda--><a href="pagina de inicio.html"><img loading="lazy" src="img/logo de la tienda chico final.webp"></a>
-                <!--Caja de texto para buscar--><input type="text" class="BarraBusqueda" id="BuscarProducto" name="Buscar un producto" >
+                <!--Caja de texto para buscar--><input type="text" class="BarraBusqueda" data-id="" name="Buscar un producto" >
                 <!--boton de busqueda--><button class="lupa"><img loading="lazy" src="img/buscar final.webp" style="border-radius: 8px;"></button>
                 <!-- carrito--><a href="carrito.html" style="margin-right: 20%;"><img loading="lazy" src="img/carrito final.webp" style="text-align: center; border-radius: 15px;"></a>
     </div>    
 
     <div class="hedBot">
-            <h3 style="text-align: center;">Categoria 1</h3>
-            <h3 style="text-align: center;">Categoria 2</h3>
-            <h3 style="text-align: center;">Categoria 3</h3>
+            <input type="text" id="usuario" style="text-align: center;" usuario> </input>
+            <input type="text" id="contraseña" style="text-align: center;" contraseña> </input>
+            <button id="enviar"style="text-align: center;">enviar</input>
     </div>
 </header>
 
@@ -30,7 +30,7 @@
             <img loading="lazy" src="img/Imagenes de productos/imagenes WEBP/refrigerador.webp" style="max-width: 90%; max-height: 90%; margin: 5%; border-radius: 5px;">
                 <div>
                     <h1>$780.000</h1>
-                    <button class="BotonCarrito"><h2>AGREGAR AL CARRITO</h2></button>
+                    <button class="BotonCarrito" data-id="1"><h2>AGREGAR AL CARRITO</h2></button>
                 </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
             <img loading="lazy" src="img/Imagenes de productos/imagenes WEBP/lavadora.webp" style="max-width: 90%; max-height: 90%; margin: 5%; border-radius: 5px;">
                 <div>
                     <h1>$578.000</h1>
-                    <button class="BotonCarrito"><h2>AGREGAR AL CARRITO</h2></button>
+                    <button class="BotonCarrito" data-id="2"><h2>AGREGAR AL CARRITO</h2></button>
                 </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
             <img loading="lazy" src="img/Imagenes de productos/imagenes WEBP/licuadora.webp" style="max-width: 90%; max-height: 90%; margin: 5%; border-radius: 5px;">
                 <div>
                     <h1>$250.000</h1>
-                    <button class="BotonCarrito"><h2>AGREGAR AL CARRITO</h2></button>
+                    <button class="BotonCarrito" data-id="3"><h2>AGREGAR AL CARRITO</h2></button>
                 </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
             <img loading="lazy" src="img/Imagenes de productos/imagenes WEBP/microondas.webp" style="max-width: 90%; max-height: 90%; margin: 5%; border-radius: 5px;">
                 <div>
                     <h1>$250.000</h1>
-                    <button class="BotonCarrito"><h2>AGREGAR AL CARRITO</h2></button>
+                    <button class="BotonCarrito" data-id="4"><h2>AGREGAR AL CARRITO</h2></button>
                 </div>
         </div>
     </div>
@@ -78,7 +78,7 @@
             <img loading="lazy" src="img/Imagenes de productos/imagenes WEBP/impresora.webp" style="max-width: 90%; max-height: 90%; margin: 5%; border-radius: 5px;">
                 <div>
                     <h1>$250.000</h1>
-                    <button class="BotonCarrito"><h2>AGREGAR AL CARRITO</h2></button>
+                    <button class="BotonCarrito" data-id="5"><h2>AGREGAR AL CARRITO</h2></button>
                 </div>
         </div>
     </div>
@@ -90,11 +90,58 @@
             <img loading="lazy" src="img/Imagenes de productos/imagenes WEBP/robot.webp" style="max-width: 90%; max-height: 90%; margin: 5%; border-radius: 5px;">
                 <div>
                     <h1>$250.000</h1>
-                    <button class="BotonCarrito"><h2>AGREGAR AL CARRITO</h2></button>
+                    <button class="BotonCarrito" data-id="6"><h2>AGREGAR AL CARRITO</h2></button>
                 </div>
         </div>
     </div>  
 </div>
+<script>
+//metodo para el carrito
+const buttons = document.querySelectorAll('.BotonCarrito');
 
+buttons.forEach(button => {
+  button.addEventListener('click', async () => {
+    const id_producto = button.getAttribute('data-id');
+
+    try {
+      const response = await fetch('http://localhost:3000/api/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id_producto })
+      });
+
+      const result = await response.json();
+      console.log('Producto agregado al carrito:', result);
+    } catch (error) {
+      console.error('Error al agregar el producto al carrito:', error);
+    }
+  });
+});
+
+//metodo para el usuario y contrasña
+document.getElementById('enviar').addEventListener('click', async () => {
+    const usuario = document.getElementById('usuario').value;
+    const contraseña = document.getElementById('contraseña').value;
+
+    try {
+      const response = await fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ usuario, contraseña })
+      });
+
+      const result = await response.json();
+      console.log('Usuario registrado:', result);
+    } catch (error) {
+      console.error('Error al registrar el usuario:', error);
+    }
+  });
+
+
+</script>
 </body>
 </html>

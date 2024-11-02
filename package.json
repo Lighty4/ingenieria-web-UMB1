@@ -1,0 +1,19 @@
+{
+  "name": "induccion-web-actividad-1",
+  "version": "1.0.0",
+  "description": "aqui esta la pagina web de Andrés Felipe Bello Ruíz todos los archivos necesarios para la actividad estan en este repositorio",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.3",
+    "sequelize": "^6.37.5",
+    "sequelize-cli": "^6.6.2"
+  }
+}
